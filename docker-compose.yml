@@ -1,0 +1,17 @@
+services:
+  elm_app:
+    build:
+      context: .
+    container_name: elm_app
+    init: true
+    ports:
+      - published: 8000
+        target: 8000
+    volumes:
+      - .:/code:delegated
+    working_dir: /code
+
+version: '3.7'
+
+volumes:
+  code: {}

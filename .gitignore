@@ -1,0 +1,21 @@
+# Desktop Services Store on macOS
+.DS_Store
+
+yarn-debug.log*
+yarn-error.log*
+
+# elm-package generated files
+examples/elm-stuff
+
+# elm-repl generated files
+examples/repl-temp-*
+
+# Dependency directories
+examples/node_modules
+
+# Editor
+.idea
+.vscode/
+
+# Package system
+.tool-versions
