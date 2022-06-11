@@ -1,6 +1,6 @@
 module NewRelic.Nreum exposing
     ( currentRouteName, interaction, noticeError, pageAction, release
-    , publish
+    , publish, publishList
     )
 
 {-| You can use browser agent and SPA API to monitor virtually anything that executes inside the browser.
@@ -21,7 +21,7 @@ SPA monitoring can help you:
 
 ## Publishing
 
-@docs publish
+@docs publish, publishList
 
 -}
 
@@ -64,6 +64,11 @@ pageAction config =
 release : Release.Release -> NreumTracking
 release config =
     ReleaseTracking config
+
+
+publishList : List RumTracking -> List (Cmd msg)
+publishList =
+    List.map publish
 
 
 publish : NreumTracking -> Cmd msg

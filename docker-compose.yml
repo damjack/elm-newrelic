@@ -1,8 +1,8 @@
 services:
-  elm_app:
+  web:
     build:
       context: .
-    container_name: elm_app
+    container_name: elm_newrelic
     init: true
     ports:
       - published: 8000
