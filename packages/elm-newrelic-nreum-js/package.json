@@ -1,0 +1,69 @@
+{
+  "name": "elm-newrelic-nreum.js",
+  "version": "1.0.0",
+  "description": "Typescript library to wrap NewRelic NREUM for elm-newrelic Elm package",
+  "files": [
+    "dist/*"
+  ],
+  "main": "dist/elm-newrelic-nreum.cjs.js",
+  "module": "dist/elm-newrelic-nreum.esm.js",
+  "scripts": {
+    "docs": "typedoc src --out docs",
+    "clean": "rimraf dist",
+    "test": "jest --config jestconfig.json",
+    "dev": "rollup -c -w",
+    "prebuild": "run clean",
+    "build": "rollup -c",
+    "preversion": "run build",
+    "format": "prettier --write '{src,tests}/**/*.ts'",
+    "lint": "eslint -c .eslintrc.js --ext .ts src/",
+    "lint:fix": "eslint -c .eslintrc.js --ext .ts src/ --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damjack/elm-newrelic.git"
+  },
+  "keywords": [
+    "NewRelic",
+    "browser api",
+    "SPA api",
+    "Nreum"
+  ],
+  "author": "Damiano Giacomello <giacomello.damiano@gmail.com>",
+  "license": "BSD-3-Clause",
+  "homepage": "https://github.com/damjack/elm-newrelic/packages/js#readme",
+  "engines": {
+    "node": ">=16.14.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "@rollup/plugin-typescript": "^8.3.2",
+    "@types/elm": "^0.19.1",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsdoc": "^39.2.8",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.4.1",
+    "rollup": "^2.70.2",
+    "ts-jest": "^27.1.4",
+    "ts-loader": "^8.0.17",
+    "tslib": "^2.3.1",
+    "typedoc": "^0.22.15",
+    "typedoc-github-wiki-theme": "^0.5.1",
+    "typedoc-plugin-markdown": "^3.10.3",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "@types/newrelic": "^7.0.3",
+    "newrelic": "^8.13.2"
+  }
+}

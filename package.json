@@ -1,0 +1,23 @@
+{
+  "name": "elm-newrelic",
+  "version": "1.0.0",
+  "repository": "git@github.com:damjack/elm-newrelic.git",
+  "author": "Damiano Giacomello <giacomello.damiano@gmail.com>",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "docs": "lerna run docs --stream",
+    "build": "lerna run build --stream",
+    "install": "lerna bootstrap",
+    "format": "lerna run format --stream",
+    "lint": "lerna run lint --stream",
+    "lint:fix": "lerna run lint:fix --stream",
+    "test": "lerna run test --stream"
+  }
+}
