@@ -5,13 +5,13 @@ yarn-debug.log*
 yarn-error.log*
 
 # elm-package generated files
-examples/elm-stuff
+elm-stuff
 
 # elm-repl generated files
 examples/repl-temp-*
 
 # Dependency directories
-examples/node_modules
+node_modules/
 
 # Editor
 .idea

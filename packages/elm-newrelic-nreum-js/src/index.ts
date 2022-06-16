@@ -6,4 +6,4 @@ export {
   trackNoticeError,
   trackPageAction,
   trackRelease,
-} from './components/elm-newrelic';
+} from './components/elm-newrelic/nreum';
