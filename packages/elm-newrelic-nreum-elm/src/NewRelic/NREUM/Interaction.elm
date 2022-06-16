@@ -1,4 +1,4 @@
-module NewRelic.Interaction exposing
+module NewRelic.NREUM.Interaction exposing
     ( Interaction
     , init
     , withActionText

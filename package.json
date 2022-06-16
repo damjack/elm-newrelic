@@ -2,7 +2,7 @@
   "name": "elm-newrelic",
   "version": "1.0.0",
   "repository": "git@github.com:damjack/elm-newrelic.git",
-  "author": "Damiano Giacomello",
+  "author": "Damiano Giacomello <giacomello.damiano@gmail.com>",
   "license": "BSD-3-Clause",
   "private": true,
   "workspaces": [

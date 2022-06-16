@@ -1,8 +1,9 @@
 {
-  "name": "elm-newrelic-browser.elm",
+  "name": "elm-newrelic-nreum.elm",
   "version": "1.0.0",
   "description": "ELM library to emit NewRelic Nreum Cmd msg",
   "repository": "git@github.com:damjack/elm-ewrelic.git",
+  "author": "Damiano Giacomello <giacomello.damiano@gmail.com>",
   "license": "BSD-3-Clause",
   "scripts": {
     "analyse": "elm-analyse  src/**/*",

@@ -1,15 +1,15 @@
 {
     "type": "package",
-    "name": "damjack/elm-newrelic-browser",
-    "summary": "Utilities and CMD msg to NewRelic",
+    "name": "damjack/elm-newrelic-nreum",
+    "summary": "Opinionated library to use NewRelic NREUM with ELM",
     "exposed-modules": [
-        "NewRelic.Nreum",
-        "NewRelic.CurrentRouteName",
-        "NewRelic.Interaction",
-        "NewRelic.NoticeError",
-        "NewRelic.PageAction",
-        "NewRelic.Release",
-        "NewRelic.Tracking"
+        "NewRelicNreum",
+        "NewRelic.NREUM.CurrentRouteName",
+        "NewRelic.NREUM.Interaction",
+        "NewRelic.NREUM.NoticeError",
+        "NewRelic.NREUM.PageAction",
+        "NewRelic.NREUM.Release",
+        "NewRelic.NREUM.Tracking"
     ],
     "license": "BSD-3-Clause",
     "version": "1.0.0",

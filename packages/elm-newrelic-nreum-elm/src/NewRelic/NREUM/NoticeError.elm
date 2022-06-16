@@ -1,4 +1,4 @@
-module NewRelic.NoticeError exposing
+module NewRelic.NREUM.NoticeError exposing
     ( NoticeError
     , init
     , withPageUrl

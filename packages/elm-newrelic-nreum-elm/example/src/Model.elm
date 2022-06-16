@@ -2,9 +2,10 @@ module Model exposing (..)
 
 import Api
 import Graphql.Http
-import NewRelic.NoticeError as NRNoticeError
-import NewRelic.Nreum as NRNreum
+import NewRelic.NREUM.NoticeError as NRNoticeError
+import NewRelicNreum as NRNreum
 import RemoteData exposing (RemoteData)
+import TrackingPorts
 
 
 type Msg
@@ -50,7 +51,7 @@ updateModel model response =
                 |> NRNoticeError.init "error @requestResult"
                 |> NRNoticeError.withPageUrl "/home"
                 |> NRNreum.noticeError
-                |> NRNreum.publish
+                |> NRNreum.publish TrackingPorts.trackNoticeError
             )
 
         _ ->

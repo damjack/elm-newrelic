@@ -1,4 +1,4 @@
-module NewRelic.PageAction exposing
+module NewRelic.NREUM.PageAction exposing
     ( PageAction
     , init
     , withPageUrl, withAdditionalData

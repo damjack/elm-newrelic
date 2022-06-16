@@ -1,4 +1,4 @@
-module NewRelic.Release exposing
+module NewRelic.NREUM.Release exposing
     ( Release
     , init
     , encode

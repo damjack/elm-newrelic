@@ -1,4 +1,4 @@
-module NewRelic.CurrentRouteName exposing
+module NewRelic.NREUM.CurrentRouteName exposing
     ( CurrentRouteName
     , init
     , encode

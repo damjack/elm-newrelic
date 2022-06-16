@@ -1,6 +1,6 @@
-module NewRelic.Nreum exposing
+module NewRelicNreum exposing
     ( currentRouteName, interaction, noticeError, pageAction, release
-    , publish, publishList
+    , publish
     )
 
 {-| You can use browser agent and SPA API to monitor virtually anything that executes inside the browser.
@@ -25,12 +25,12 @@ SPA monitoring can help you:
 
 -}
 
-import NewRelic.CurrentRouteName as CurrentRouteName
-import NewRelic.Interaction as Interaction
-import NewRelic.NoticeError as NoticeError
-import NewRelic.PageAction as PageAction
-import NewRelic.Release as Release
-import NewRelic.Tracking as Tracking
+import Json.Encode as JE
+import NewRelic.NREUM.CurrentRouteName as CurrentRouteName
+import NewRelic.NREUM.Interaction as Interaction
+import NewRelic.NREUM.NoticeError as NoticeError
+import NewRelic.NREUM.PageAction as PageAction
+import NewRelic.NREUM.Release as Release
 
 
 type NreumTracking
@@ -66,35 +66,30 @@ release config =
     ReleaseTracking config
 
 
-publishList : List RumTracking -> List (Cmd msg)
-publishList =
-    List.map publish
-
-
-publish : NreumTracking -> Cmd msg
-publish tracking =
+publish : (JE.Value -> Cmd msg) -> NreumTracking -> Cmd msg
+publish mapperCmd tracking =
     case tracking of
         CurrentRouteNameTracking config ->
             config
                 |> CurrentRouteName.encode
-                |> Tracking.trackCurrentRouteName
+                |> mapperCmd
 
         InteractionTracking config ->
             config
                 |> Interaction.encode
-                |> Tracking.trackInteraction
+                |> mapperCmd
 
         NoticeErrorTracking config ->
             config
                 |> NoticeError.encode
-                |> Tracking.trackNoticeError
+                |> mapperCmd
 
         PageActionTracking config ->
             config
                 |> PageAction.encode
-                |> Tracking.trackPageAction
+                |> mapperCmd
 
         ReleaseTracking config ->
             config
                 |> Release.encode
-                |> Tracking.trackRelease
+                |> mapperCmd
