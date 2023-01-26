@@ -1,125 +1,128 @@
-import {
-  trackCurrentRouteName,
-  trackInteraction,
-  trackNoticeError,
-  trackPageAction,
-  trackRelease,
-} from './trackingSend';
+import { addPageAction, addRelease, interaction, noticeError, routeName } from './trackingSend'
 import type {
   CSPEvent,
   ElmPortsToJS,
-  TrackCurrentRouteName,
-  TrackInteraction,
-  TrackNoticeError,
-  TrackPageAction,
-  TrackRelease,
-} from './types.d';
+  ElmUniquePortToJS,
+  NREUMAddPageActionPayload,
+  NREUMAddReleasePayload,
+  NREUMInteractionPayload,
+  NREUMNoticeErrorPayload,
+  NREUMPortPayload,
+  NREUMRouteNamePayload,
+} from './types.d'
 
 /**
  * Try to track SCP error to RUM & Session Replay
  *
- * @param console Enable console log, default false
+ * @param console - Enable console log, default false
  */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export const cspEvent: CSPEvent = (console = false) => {
   if (typeof window !== 'object') {
     // does not appear to be a browser environment
-    throw new Error('This code is only meant to run in a browser environment');
+    throw new Error('This code is only meant to run in a browser environment')
   }
 
   if ('NREUM' in window) {
     if ('SecurityPolicyViolationEvent' in window) {
       window.document.addEventListener('securitypolicyviolation', (e) => {
         const obj = {
-          message: 'SecurityPolicyViolationEvent @CSP',
           blockedURI: e.blockedURI,
-          violatedDirective: e.violatedDirective,
-          originalPolicy: e.originalPolicy,
           effectiveDirective: e.effectiveDirective,
+          message: 'SecurityPolicyViolationEvent @CSP',
+          originalPolicy: e.originalPolicy,
           url: document.location.pathname,
-        };
+          violatedDirective: e.violatedDirective,
+        }
 
         if (!console) {
+          /* eslint-disable @typescript-eslint/no-unsafe-call */
           window.NREUM.noticeError(
-            new Error(
-              `blockedURI: ${e.blockedURI}, violatedDirective: ${e.violatedDirective}, originalPolicy: ${e.originalPolicy}, effectiveDirective: ${e.effectiveDirective}`,
-            ),
+            new Error(`csp_violation: ${e.blockedURI} blocked by ${e.violatedDirective} directive`),
             obj,
-          );
+          )
         } else {
-          window.console.log('SecurityPolicyViolationEvent: ', obj);
+          window.console.log('SecurityPolicyViolationEvent: ', obj)
         }
-      });
+      })
     }
   }
-};
+}
 
 /**
  * After initialize NREUM and ELM App, you can push MSG to JS and try to read
  *
- * @param elmApp Current Elm Application
- * @param console Enable console log, default false
+ * @param elmApp - Current Elm Application
+ * @param console - Enable console log, default false
  */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 export const elmPortsToJS: ElmPortsToJS = (elmApp, console = false) => {
   if ('NREUM' in window) {
-    if (elmApp.ports.trackCurrentRouteName !== undefined) {
-      elmApp.ports.trackCurrentRouteName.subscribe((payload) => {
-        if (!console) {
-          window.NREUM.setCurrentRouteName(payload.routeName); // eslint-disable-line no-undef
-        } else {
-          window.console.log('trackCurrentRouteName');
-        }
-      });
+    if (elmApp.ports.routeNamePort_ !== undefined) {
+      elmApp.ports.routeNamePort_.subscribe((payload: NREUMRouteNamePayload) => {
+        routeName(payload, console)
+      })
     }
 
-    if (elmApp.ports.trackInteraction !== undefined) {
-      elmApp.ports.trackInteraction.subscribe((payload) => {
-        if (!console) {
-          const interaction = window.NREUM.interaction(); // eslint-disable-line no-undef
-          if (payload.actionText !== undefined) {
-            interaction.actionText(payload.actionText);
-          }
-          interaction.setName(payload.interactionName);
-          payload.interactionAttributes.forEach((attr) => {
-            interaction.setAttribute(attr.key, attr.value);
-          });
-          interaction.setAttribute('version', version);
-          interaction.save().end();
-        } else {
-          window.console.log('trackInteraction');
-        }
-      });
+    if (elmApp.ports.interactionPort_ !== undefined) {
+      elmApp.ports.interactionPort_.subscribe((payload: NREUMInteractionPayload) => {
+        interaction(payload, console)
+      })
     }
 
-    if (elmApp.ports.trackNoticeError !== undefined) {
-      elmApp.ports.trackNoticeError.subscribe((payload) => {
-        /* eslint-disable no-undef */
-        NREUM.noticeError(new Error(`${payload.noticeError}`), {
-          message: payload.noticeMessage,
-          url: payload.noticePageUrl,
-        });
-      });
+    if (elmApp.ports.noticeErrorPort_ !== undefined) {
+      elmApp.ports.noticeErrorPort_.subscribe((payload: NREUMNoticeErrorPayload) => {
+        noticeError(payload, console)
+      })
     }
 
-    if (elmApp.ports.trackPageAction !== undefined) {
-      elmApp.ports.trackPageAction.subscribe((payload) => {
-        if (!console) {
-          window.NREUM.addPageAction(payload.pageActionName, payload.pageActionAttributes); // eslint-disable-line no-undef
-        } else {
-          window.console.log('trackCurrentRouteName');
-        }
-      });
+    if (elmApp.ports.addPageActionPort_ !== undefined) {
+      elmApp.ports.addPageActionPort_.subscribe((payload: NREUMAddPageActionPayload) => {
+        addPageAction(payload, console)
+      })
     }
 
-    if (elmApp.ports.trackRelease !== undefined) {
-      elmApp.ports.trackRelease.subscribe((payload) => {
-        if (!console) {
-          window.NREUM.addRelease(payload.releaseName, payload.releaseId); // eslint-disable-line no-undef
-        } else {
-          window.console.log('trackCurrentRouteName');
-        }
-      });
+    if (elmApp.ports.addReleasePort_ !== undefined) {
+      elmApp.ports.addReleasePort_.subscribe((payload: NREUMAddReleasePayload) => {
+        addRelease(payload, console)
+      })
     }
   }
-};
+}
+
+/**
+ * Alternative method with you can push MSG to JS
+ *
+ * @param elmApp - Current Elm Application
+ * @param console - Enable console log, default false
+ */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+export const elmUniquePortToJS: ElmUniquePortToJS = (elmApp, console = false) => {
+  if ('NREUM' in window) {
+    if (elmApp.ports.nreumPort_ !== undefined) {
+      elmApp.ports.nreumPort_.subscribe((payload: NREUMPortPayload) => {
+        switch (payload.type_) {
+          case 'route_name':
+            routeName(payload, console)
+            break
+
+          case 'interaction':
+            interaction(payload, console)
+            break
+
+          case 'page_action':
+            addPageAction(payload, console)
+            break
+
+          case 'notice_error':
+            noticeError(payload, console)
+            break
+
+          case 'release':
+            addRelease(payload, console)
+            break
+        }
+      })
+    }
+  }
+}

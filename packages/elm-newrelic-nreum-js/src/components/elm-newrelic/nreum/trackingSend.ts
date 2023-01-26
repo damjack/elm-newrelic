@@ -1,64 +1,99 @@
 import type {
-  TrackCurrentRouteName,
-  TrackPageAction,
-  TrackInteraction,
-  TrackNoticeError,
-  TrackRelease,
-} from './types.d';
+  AddPageActionPort,
+  AddReleasePort,
+  InteractionPort,
+  NoticeErrorPort,
+  RouteNamePort,
+} from './types.d'
 
 /**
  * Try to track routing path name to RUM
  *
- * @param payload Custom Payload for current tracking
+ * @param payload - Custom Payload for current tracking
+ * @param console - Enable console log, default false
  */
-export const trackCurrentRouteName: TrackCurrentRouteName = (payload) => {
-  datadogRum.startView(payload.viewName);
-};
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+export const routeName: RouteNamePort = (payload, console = false) => {
+  if (!console) {
+    /* eslint-disable @typescript-eslint/no-unsafe-call */
+    window.NREUM.setCurrentRouteName(payload.routeName) // eslint-disable-line no-undef
+  } else {
+    window.console.log('routeName: ', payload)
+  }
+}
 
 /**
  * Try to track Global Context to RUM
  *
- * @param payload Custom Payload for current tracking
+ * @param payload - Custom Payload for current tracking
+ * @param console - Enable console log, default false
  */
-export const trackPageAction: TrackPageAction = (payload) => {
-  /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-  const obj = {
-    ...{ contextKey: payload.contextKey, contextValue: payload.contextValue },
-    ...payload.additionalData,
-  };
-
-  /* eslint-disable @typescript-eslint/no-unsafe-argument */
-  datadogRum.setRumPageAction(obj);
-};
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+export const addPageAction: AddPageActionPort = (payload, console = false) => {
+  if (!console) {
+    /* eslint-disable @typescript-eslint/no-unsafe-call */
+    window.NREUM.addPageAction(payload.actionName, payload.additionalData) // eslint-disable-line no-undef
+  } else {
+    window.console.log('pageAction: ', payload)
+  }
+}
 
 /**
  * Try to track Custom Action to RUM
  *
- * @param payload Custom Payload for current tracking
+ * @param payload - Custom Payload for current tracking
+ * @param console - Enable console log, default false
  */
-export const trackInteraction: TrackInteraction = (payload) => {
-  datadogRum.addAction(payload.customAction, payload.customData);
-};
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+export const interaction: InteractionPort = (payload, console = false) => {
+  if (!console) {
+    /* eslint-disable @typescript-eslint/no-unsafe-call */
+    const interaction = window.NREUM.interaction() // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+    if (payload.actionText !== undefined) {
+      interaction.actionText(payload.actionText)
+    }
+    interaction.setName(payload.interactionName)
+    payload.interactionAttributes.forEach((attr) => {
+      interaction.setAttribute(attr.key, attr.value)
+    })
+    interaction.save().end()
+  } else {
+    window.console.log('interaction: ', payload)
+  }
+}
 
 /**
  * Try to track error to RUM
  *
- * @param payload Custom Payload for current tracking
+ * @param payload - Custom Payload for current tracking
+ * @param console - Enable console log, default false
  */
-export const trackNoticeError: TrackNoticeError = (payload) => {
-  datadogRum.addError(new Error(`${payload.customError}`), {
-    message: payload.customMessage,
-    url: payload.url,
-  });
-};
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+export const noticeError: NoticeErrorPort = (payload, console = false) => {
+  if (!console) {
+    /* eslint-disable no-undef */
+    /* eslint-disable @typescript-eslint/no-unsafe-call */
+    window.NREUM.noticeError(
+      new Error(`${payload.errorPrefix}: ${payload.errorStackTrace}`),
+      payload.additionalData,
+    )
+  } else {
+    window.console.log('noticeError: ', payload)
+  }
+}
 
 /**
  * Try to identify User to RUM
  *
- * @param payload Custom Payload for current tracking
+ * @param payload - Custom Payload for current tracking
+ * @param console - Enable console log, default false
  */
-export const trackRelease: TrackRelease = (payload) => {
-  const obj = { ...{ email: payload.id }, ...payload.additionalData };
-
-  datadogRum.setUser(obj);
-};
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+export const addRelease: AddReleasePort = (payload, console = false) => {
+  if (!console) {
+    /* eslint-disable @typescript-eslint/no-unsafe-call */
+    window.NREUM.addRelease(payload.releaseName, payload.releaseVersion) // eslint-disable-line no-undef
+  } else {
+    window.console.log('addRelease: ', payload)
+  }
+}

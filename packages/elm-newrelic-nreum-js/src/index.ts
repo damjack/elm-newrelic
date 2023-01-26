@@ -1,9 +1,10 @@
 export {
+  addPageAction,
+  addRelease,
   cspEvent,
   elmPortsToJS,
-  trackCurrentRouteName,
-  trackInteraction,
-  trackNoticeError,
-  trackPageAction,
-  trackRelease,
-} from './components/elm-newrelic/nreum';
+  elmUniquePortToJS,
+  interaction,
+  noticeError,
+  routeName,
+} from './components/elm-newrelic/nreum'

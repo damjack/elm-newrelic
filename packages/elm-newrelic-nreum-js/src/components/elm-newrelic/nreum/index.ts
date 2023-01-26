@@ -1,8 +1,6 @@
-export { cspEvent, elmPortsToJS } from './elmPorts';
 export {
-  trackCurrentRouteName,
-  trackInteraction,
-  trackNoticeError,
-  trackPageAction,
-  trackRelease,
-} from './trackingSend';
+  cspEvent, elmPortsToJS, elmUniquePortToJS
+} from './elmPorts'
+export {
+  addPageAction, addRelease, interaction, noticeError, routeName
+} from './trackingSend'
