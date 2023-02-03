@@ -1,4 +1,7 @@
 export {
+  init
+} from './loadSpa'
+export {
   cspEvent, elmPortsToJS, elmUniquePortToJS
 } from './elmPorts'
 export {

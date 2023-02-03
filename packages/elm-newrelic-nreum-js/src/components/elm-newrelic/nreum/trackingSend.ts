@@ -15,8 +15,10 @@ import type {
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export const routeName: RouteNamePort = (payload, console = false) => {
   if (!console) {
-    /* eslint-disable @typescript-eslint/no-unsafe-call */
-    window.NREUM.setCurrentRouteName(payload.routeName) // eslint-disable-line no-undef
+    if ('NREUM' in window) {
+      /* eslint-disable @typescript-eslint/no-unsafe-call */
+      window.NREUM.setCurrentRouteName(payload.routeName) // eslint-disable-line no-undef
+    }
   } else {
     window.console.log('routeName: ', payload)
   }
@@ -31,8 +33,10 @@ export const routeName: RouteNamePort = (payload, console = false) => {
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export const addPageAction: AddPageActionPort = (payload, console = false) => {
   if (!console) {
-    /* eslint-disable @typescript-eslint/no-unsafe-call */
-    window.NREUM.addPageAction(payload.actionName, payload.additionalData) // eslint-disable-line no-undef
+    if ('NREUM' in window) {
+      /* eslint-disable @typescript-eslint/no-unsafe-call */
+      window.NREUM.addPageAction(payload.actionName, payload.additionalData) // eslint-disable-line no-undef
+    }
   } else {
     window.console.log('pageAction: ', payload)
   }
@@ -47,16 +51,18 @@ export const addPageAction: AddPageActionPort = (payload, console = false) => {
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export const interaction: InteractionPort = (payload, console = false) => {
   if (!console) {
-    /* eslint-disable @typescript-eslint/no-unsafe-call */
-    const interaction = window.NREUM.interaction() // eslint-disable-line @typescript-eslint/no-unsafe-assignment
-    if (payload.actionText !== undefined) {
-      interaction.actionText(payload.actionText)
+    if ('NREUM' in window) {
+      /* eslint-disable @typescript-eslint/no-unsafe-call */
+      const interaction = window.NREUM.interaction() // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+      if (payload.interactionMessage !== undefined) {
+        interaction.actionText(payload.interactionMessage)
+      }
+      interaction.setName(payload.interactionName)
+      payload.additionalData.forEach((attr) => {
+        interaction.setAttribute(attr.key, attr.value)
+      })
+      interaction.save().end()
     }
-    interaction.setName(payload.interactionName)
-    payload.interactionAttributes.forEach((attr) => {
-      interaction.setAttribute(attr.key, attr.value)
-    })
-    interaction.save().end()
   } else {
     window.console.log('interaction: ', payload)
   }
@@ -71,12 +77,23 @@ export const interaction: InteractionPort = (payload, console = false) => {
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export const noticeError: NoticeErrorPort = (payload, console = false) => {
   if (!console) {
-    /* eslint-disable no-undef */
-    /* eslint-disable @typescript-eslint/no-unsafe-call */
-    window.NREUM.noticeError(
-      new Error(`${payload.errorPrefix}: ${payload.errorStackTrace}`),
-      payload.additionalData,
-    )
+    if ('NREUM' in window) {
+      /* eslint-disable no-undef */
+      /* eslint-disable @typescript-eslint/no-unsafe-call */
+      window.NREUM.noticeError(
+        new Error(`${payload.errorPrefix}: ${payload.errorStackTrace}`),
+        payload.additionalData,
+      )
+    }
+
+    if ('NRAGENT' in window) {
+      /* eslint-disable no-undef */
+      /* eslint-disable @typescript-eslint/no-unsafe-call */
+      window.NRAGENT.noticeError(
+        new Error(`${payload.errorPrefix}: ${payload.errorStackTrace}`),
+        payload.additionalData,
+      )
+    }
   } else {
     window.console.log('noticeError: ', payload)
   }
@@ -91,8 +108,10 @@ export const noticeError: NoticeErrorPort = (payload, console = false) => {
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 export const addRelease: AddReleasePort = (payload, console = false) => {
   if (!console) {
-    /* eslint-disable @typescript-eslint/no-unsafe-call */
-    window.NREUM.addRelease(payload.releaseName, payload.releaseVersion) // eslint-disable-line no-undef
+    if ('NREUM' in window) {
+      /* eslint-disable @typescript-eslint/no-unsafe-call */
+      window.NREUM.addRelease(payload.releaseName, payload.releaseVersion) // eslint-disable-line no-undef
+    }
   } else {
     window.console.log('addRelease: ', payload)
   }

@@ -23,29 +23,21 @@ export const cspEvent: CSPEvent = (console = false) => {
     throw new Error('This code is only meant to run in a browser environment')
   }
 
-  if ('NREUM' in window) {
-    if ('SecurityPolicyViolationEvent' in window) {
-      window.document.addEventListener('securitypolicyviolation', (e) => {
-        const obj = {
-          blockedURI: e.blockedURI,
-          effectiveDirective: e.effectiveDirective,
-          message: 'SecurityPolicyViolationEvent @CSP',
-          originalPolicy: e.originalPolicy,
-          url: document.location.pathname,
-          violatedDirective: e.violatedDirective,
-        }
+  if ('SecurityPolicyViolationEvent' in window) {
+    window.document.addEventListener('securitypolicyviolation', (e) => {
+      const obj = {
+        blockedURI: e.blockedURI,
+        effectiveDirective: e.effectiveDirective,
+        message: 'SecurityPolicyViolationEvent @CSP',
+        originalPolicy: e.originalPolicy,
+        url: document.location.pathname,
+        violatedDirective: e.violatedDirective,
+      }
 
-        if (!console) {
-          /* eslint-disable @typescript-eslint/no-unsafe-call */
-          window.NREUM.noticeError(
-            new Error(`csp_violation: ${e.blockedURI} blocked by ${e.violatedDirective} directive`),
-            obj,
-          )
-        } else {
-          window.console.log('SecurityPolicyViolationEvent: ', obj)
-        }
-      })
-    }
+      noticeError({
+        additionalData: obj, errorPrefix: 'csp_violation', errorStackTrace: `${e.blockedURI} blocked by ${e.violatedDirective} directive`, type_: 'notice_error'
+      }, console)
+    })
   }
 }
 
@@ -57,36 +49,39 @@ export const cspEvent: CSPEvent = (console = false) => {
  */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 export const elmPortsToJS: ElmPortsToJS = (elmApp, console = false) => {
-  if ('NREUM' in window) {
-    if (elmApp.ports.routeNamePort_ !== undefined) {
-      elmApp.ports.routeNamePort_.subscribe((payload: NREUMRouteNamePayload) => {
-        routeName(payload, console)
-      })
-    }
+  if (typeof window !== 'object') {
+    // does not appear to be a browser environment
+    throw new Error('This code is only meant to run in a browser environment')
+  }
 
-    if (elmApp.ports.interactionPort_ !== undefined) {
-      elmApp.ports.interactionPort_.subscribe((payload: NREUMInteractionPayload) => {
-        interaction(payload, console)
-      })
-    }
+  if (elmApp.ports.routeNamePort_ !== undefined) {
+    elmApp.ports.routeNamePort_.subscribe((payload: NREUMRouteNamePayload) => {
+      routeName(payload, console)
+    })
+  }
 
-    if (elmApp.ports.noticeErrorPort_ !== undefined) {
-      elmApp.ports.noticeErrorPort_.subscribe((payload: NREUMNoticeErrorPayload) => {
-        noticeError(payload, console)
-      })
-    }
+  if (elmApp.ports.interactionPort_ !== undefined) {
+    elmApp.ports.interactionPort_.subscribe((payload: NREUMInteractionPayload) => {
+      interaction(payload, console)
+    })
+  }
 
-    if (elmApp.ports.addPageActionPort_ !== undefined) {
-      elmApp.ports.addPageActionPort_.subscribe((payload: NREUMAddPageActionPayload) => {
-        addPageAction(payload, console)
-      })
-    }
+  if (elmApp.ports.noticeErrorPort_ !== undefined) {
+    elmApp.ports.noticeErrorPort_.subscribe((payload: NREUMNoticeErrorPayload) => {
+      noticeError(payload, console)
+    })
+  }
 
-    if (elmApp.ports.addReleasePort_ !== undefined) {
-      elmApp.ports.addReleasePort_.subscribe((payload: NREUMAddReleasePayload) => {
-        addRelease(payload, console)
-      })
-    }
+  if (elmApp.ports.addPageActionPort_ !== undefined) {
+    elmApp.ports.addPageActionPort_.subscribe((payload: NREUMAddPageActionPayload) => {
+      addPageAction(payload, console)
+    })
+  }
+
+  if (elmApp.ports.addReleasePort_ !== undefined) {
+    elmApp.ports.addReleasePort_.subscribe((payload: NREUMAddReleasePayload) => {
+      addRelease(payload, console)
+    })
   }
 }
 
@@ -98,31 +93,34 @@ export const elmPortsToJS: ElmPortsToJS = (elmApp, console = false) => {
  */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 export const elmUniquePortToJS: ElmUniquePortToJS = (elmApp, console = false) => {
-  if ('NREUM' in window) {
-    if (elmApp.ports.nreumPort_ !== undefined) {
-      elmApp.ports.nreumPort_.subscribe((payload: NREUMPortPayload) => {
-        switch (payload.type_) {
-          case 'route_name':
-            routeName(payload, console)
-            break
+  if (typeof window !== 'object') {
+    // does not appear to be a browser environment
+    throw new Error('This code is only meant to run in a browser environment')
+  }
 
-          case 'interaction':
-            interaction(payload, console)
-            break
+  if (elmApp.ports.nreumPort_ !== undefined) {
+    elmApp.ports.nreumPort_.subscribe((payload: NREUMPortPayload) => {
+      switch (payload.type_) {
+        case 'route_name':
+          routeName(payload, console)
+          break
 
-          case 'page_action':
-            addPageAction(payload, console)
-            break
+        case 'interaction':
+          interaction(payload, console)
+          break
 
-          case 'notice_error':
-            noticeError(payload, console)
-            break
+        case 'page_action':
+          addPageAction(payload, console)
+          break
 
-          case 'release':
-            addRelease(payload, console)
-            break
-        }
-      })
-    }
+        case 'notice_error':
+          noticeError(payload, console)
+          break
+
+        case 'release':
+          addRelease(payload, console)
+          break
+      }
+    })
   }
 }

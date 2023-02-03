@@ -1,6 +1,16 @@
 import type { ElmApp } from '@types/elm'
+import type { NrOptions } from '@newrelic/browser-agent'
+
+declare global {
+  interface Window {
+    NRAGENT: any;
+    NREUM: any;
+  }
+}
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+export type Init = (rumArgs: NrOptions) => void;
+
 export type CSPEvent = (console?: boolean) => void
 export type ElmPortsToJS = (elmApp: ElmApp, console?: boolean) => void
 export type ElmUniquePortToJS = (elmApp: ElmApp, console?: boolean) => void

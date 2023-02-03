@@ -12,7 +12,7 @@
     "clean": "rimraf dist",
     "test": "jest --config jestconfig.json",
     "dev": "rollup -c -w",
-    "prebuild": "run clean",
+    "prebuild": "yarn clean",
     "build": "rollup -c",
     "preversion": "run build",
     "format": "prettier --write '{src,tests}/**/*.ts'",
@@ -64,6 +64,7 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
+    "@newrelic/browser-agent": "^0.0.9",
     "@types/compression": "^1.7.2",
     "@types/loader-utils": "^2.0.3",
     "@types/newrelic": "^7.0.3",

@@ -1281,6 +1281,20 @@
   dependencies:
     semver "^7.3.5"
 
+"@newrelic/browser-agent-core@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@newrelic/browser-agent-core/-/browser-agent-core-0.0.9.tgz#2382d747341c772e95be0fe43b46d1df7bdedff1"
+  integrity sha512-YChTS1lVyPHMwEnGl61A5b7G8ncNgZwQtUy/2D4SbMc32ZzOnsbs0LTs5yhJzTKHFwuJZ3T0IDkjK8qZTYU5ag==
+  dependencies:
+    lodash._slice "^2.4.1"
+
+"@newrelic/browser-agent@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@newrelic/browser-agent/-/browser-agent-0.0.9.tgz#10d1c91fef7ace2c8c4a9486ddcafc528c315577"
+  integrity sha512-JkBueOhDoA0ytHWS0k1mu5TZycPax0NsZaz8YLKVx+2bugyCrpe034UzGut0mQSb4bflawXYaWqra+KOw+c+ow==
+  dependencies:
+    "@newrelic/browser-agent-core" "^0.0.9"
+
 "@newrelic/koa@^6.1.1":
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/@newrelic/koa/-/koa-6.1.2.tgz#98e8e24ea0bee97197f02030e3ad09912dadacf2"
@@ -5792,6 +5806,11 @@ lodash._reinterpolate@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha512-xYHt68QRoYGjeeM/XOE1uJtvXQAgvszfBhjV4yvsQH0u2i9I6cI6c6/eG4Hh3UAOVn0y/xAXwmTzEay49Q//HA==
+
+lodash._slice@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/lodash._slice/-/lodash._slice-2.4.1.tgz#745cf41a53597b18f688898544405efa2b06d90f"
+  integrity sha512-+odPJa4PE2UgYnQgJgkLs0UD03QU78R2ivhrFnG9GdtYOZdE6ObxOj7KiUEUlqOOgatFT+ZqSypFjDSduTigKg==
 
 lodash.camelcase@^4.3.0:
   version "4.3.0"

@@ -105,7 +105,7 @@ module.exports = {
       "@typescript-eslint/keyword-spacing": "error",
       "max-len": [
         2,
-        130,
+        180,
         4
       ],
       "new-cap": "error",

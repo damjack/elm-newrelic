@@ -4,6 +4,7 @@ export {
   cspEvent,
   elmPortsToJS,
   elmUniquePortToJS,
+  init,
   interaction,
   noticeError,
   routeName,
