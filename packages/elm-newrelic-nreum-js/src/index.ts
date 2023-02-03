@@ -8,4 +8,4 @@ export {
   interaction,
   noticeError,
   routeName,
-} from './components/elm-newrelic/nreum'
+} from './components/elm-newrelic/nreum';

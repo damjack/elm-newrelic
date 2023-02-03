@@ -1,5 +1,5 @@
-import { BrowserAgent } from '@newrelic/browser-agent'
-import type { Init } from './types.d'
+import { BrowserAgent } from '@newrelic/browser-agent';
+import type { Init } from './types.d';
 
 /**
  * Try to initialize NREUM
@@ -15,14 +15,14 @@ export const init: Init = (nreumOptions) => {
       cookies_enabled: true,
     },
     sa: 1,
-  }
-  const optionApplication = { ...defaults, ...nreumOptions }
+  };
+  const optionApplication = { ...defaults, ...nreumOptions };
 
   if (!window.NRAGENT) {
-    window.NRAGENT = {}
+    window.NRAGENT = {};
   }
-  window.NRAGENT = new BrowserAgent()
+  window.NRAGENT = new BrowserAgent();
   window.NRAGENT.start(optionApplication).then(() => {
-    console.log('Browser Agent Initialized!')
-  })
-}
+    console.log('Browser Agent Initialized!');
+  });
+};
