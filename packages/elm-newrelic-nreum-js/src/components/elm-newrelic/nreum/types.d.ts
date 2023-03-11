@@ -1,8 +1,9 @@
-import type { ElmApp } from '@types/elm';
-import type { NrOptions } from '@newrelic/browser-agent';
+import type { ElmApp } from '@types/elm'
+import type { NrOptions } from '@newrelic/browser-agent'
 
 declare global {
   interface Window {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     NRAGENT: any;
     NREUM: any;
   }
