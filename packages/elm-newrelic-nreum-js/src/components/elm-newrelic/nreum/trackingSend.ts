@@ -4,7 +4,7 @@ import type {
   InteractionPort,
   NoticeErrorPort,
   RouteNamePort,
-} from './types.d';
+} from './types.d'
 
 /**
  * Try to track routing path name to RUM
@@ -17,12 +17,12 @@ export const routeName: RouteNamePort = (payload, console = false) => {
   if (!console) {
     if ('NREUM' in window) {
       /* eslint-disable @typescript-eslint/no-unsafe-call */
-      window.NREUM.setCurrentRouteName(payload.routeName); // eslint-disable-line no-undef
+      window.NREUM.setCurrentRouteName(payload.routeName) // eslint-disable-line no-undef
     }
   } else {
-    window.console.log('routeName: ', payload);
+    window.console.log('routeName: ', payload)
   }
-};
+}
 
 /**
  * Try to track Global Context to RUM
@@ -35,12 +35,12 @@ export const addPageAction: AddPageActionPort = (payload, console = false) => {
   if (!console) {
     if ('NREUM' in window) {
       /* eslint-disable @typescript-eslint/no-unsafe-call */
-      window.NREUM.addPageAction(payload.actionName, payload.additionalData); // eslint-disable-line no-undef
+      window.NREUM.addPageAction(payload.actionName, payload.additionalData) // eslint-disable-line no-undef
     }
   } else {
-    window.console.log('pageAction: ', payload);
+    window.console.log('pageAction: ', payload)
   }
-};
+}
 
 /**
  * Try to track Custom Action to RUM
@@ -53,20 +53,20 @@ export const interaction: InteractionPort = (payload, console = false) => {
   if (!console) {
     if ('NREUM' in window) {
       /* eslint-disable @typescript-eslint/no-unsafe-call */
-      const interaction = window.NREUM.interaction(); // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+      const interaction = window.NREUM.interaction() // eslint-disable-line @typescript-eslint/no-unsafe-assignment
       if (payload.interactionMessage !== undefined) {
-        interaction.actionText(payload.interactionMessage);
+        interaction.actionText(payload.interactionMessage)
       }
-      interaction.setName(payload.interactionName);
+      interaction.setName(payload.interactionName)
       payload.additionalData.forEach((attr) => {
-        interaction.setAttribute(attr.key, attr.value);
-      });
-      interaction.save().end();
+        interaction.setAttribute(attr.key, attr.value)
+      })
+      interaction.save().end()
     }
   } else {
-    window.console.log('interaction: ', payload);
+    window.console.log('interaction: ', payload)
   }
-};
+}
 
 /**
  * Try to track error to RUM
@@ -83,7 +83,7 @@ export const noticeError: NoticeErrorPort = (payload, console = false) => {
       window.NREUM.noticeError(
         new Error(`${payload.errorPrefix}: ${payload.errorStackTrace}`),
         payload.additionalData,
-      );
+      )
     }
 
     if ('NRAGENT' in window) {
@@ -92,12 +92,12 @@ export const noticeError: NoticeErrorPort = (payload, console = false) => {
       window.NRAGENT.noticeError(
         new Error(`${payload.errorPrefix}: ${payload.errorStackTrace}`),
         payload.additionalData,
-      );
+      )
     }
   } else {
-    window.console.log('noticeError: ', payload);
+    window.console.log('noticeError: ', payload)
   }
-};
+}
 
 /**
  * Try to identify User to RUM
@@ -110,9 +110,9 @@ export const addRelease: AddReleasePort = (payload, console = false) => {
   if (!console) {
     if ('NREUM' in window) {
       /* eslint-disable @typescript-eslint/no-unsafe-call */
-      window.NREUM.addRelease(payload.releaseName, payload.releaseVersion); // eslint-disable-line no-undef
+      window.NREUM.addRelease(payload.releaseName, payload.releaseVersion) // eslint-disable-line no-undef
     }
   } else {
-    window.console.log('addRelease: ', payload);
+    window.console.log('addRelease: ', payload)
   }
-};
+}

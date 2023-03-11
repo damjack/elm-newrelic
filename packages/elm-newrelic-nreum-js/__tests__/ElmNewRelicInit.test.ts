@@ -1,10 +1,10 @@
 import { init } from '../src/index';
 
 test("call init with different configuration", () => {
-  const init = {clientToken: 'XXX', applicationId: 'YYY'};
-  const testInit = jest.fn(args => init({clientToken: args.clientToken, applicationId: args.applicationId}));
+  const customInit = {beacon: "xxx.com"};
+  const testInit = jest.fn(args => init({beacon: args.beacon}));
 
-  testInit(init);
+  testInit(customInit);
 
-  expect(testInit).toHaveBeenNthCalledWith(1, {clientToken: 'XXX', applicationId: 'YYY'});
+  expect(testInit).toHaveBeenNthCalledWith(1, {sa: 1, beacon: "xxx.com"});
 });

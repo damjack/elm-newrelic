@@ -35,7 +35,7 @@
 
 #### Defined in
 
-[components/elm-newrelic/nreum/trackingSend.ts:34](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L34)
+[components/elm-newrelic/nreum/trackingSend.ts:34](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L34)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-[components/elm-newrelic/nreum/trackingSend.ts:109](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L109)
+[components/elm-newrelic/nreum/trackingSend.ts:109](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L109)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[components/elm-newrelic/nreum/elmPorts.ts:20](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/elmPorts.ts#L20)
+[components/elm-newrelic/nreum/elmPorts.ts:20](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/elmPorts.ts#L20)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 #### Defined in
 
-[components/elm-newrelic/nreum/elmPorts.ts:51](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/elmPorts.ts#L51)
+[components/elm-newrelic/nreum/elmPorts.ts:57](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/elmPorts.ts#L57)
 
 ___
 
@@ -118,7 +118,7 @@ ___
 
 #### Defined in
 
-[components/elm-newrelic/nreum/elmPorts.ts:95](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/elmPorts.ts#L95)
+[components/elm-newrelic/nreum/elmPorts.ts:101](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/elmPorts.ts#L101)
 
 ___
 
@@ -138,7 +138,7 @@ ___
 
 #### Defined in
 
-[components/elm-newrelic/nreum/loadSpa.ts:10](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/loadSpa.ts#L10)
+[components/elm-newrelic/nreum/loadSpa.ts:10](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/loadSpa.ts#L10)
 
 ___
 
@@ -159,7 +159,7 @@ ___
 
 #### Defined in
 
-[components/elm-newrelic/nreum/trackingSend.ts:52](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L52)
+[components/elm-newrelic/nreum/trackingSend.ts:52](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L52)
 
 ___
 
@@ -180,7 +180,7 @@ ___
 
 #### Defined in
 
-[components/elm-newrelic/nreum/trackingSend.ts:78](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L78)
+[components/elm-newrelic/nreum/trackingSend.ts:78](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L78)
 
 ___
 
@@ -201,4 +201,4 @@ ___
 
 #### Defined in
 
-[components/elm-newrelic/nreum/trackingSend.ts:16](https://github.com/damjack/elm-newrelic/blob/42fac07/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L16)
+[components/elm-newrelic/nreum/trackingSend.ts:16](https://github.com/damjack/elm-newrelic/blob/e155785/packages/elm-newrelic-nreum-js/src/components/elm-newrelic/nreum/trackingSend.ts#L16)
