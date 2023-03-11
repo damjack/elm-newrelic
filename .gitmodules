@@ -1,0 +1,6 @@
+[submodule "packages/elm-newrelic-nreum.js"]
+	path = packages/elm-newrelic-nreum.js
+	url = git@github.com:damjack/elm-newrelic-nreum.js.git
+[submodule "packages/elm-newrelic-nreum.elm"]
+	path = packages/elm-newrelic-nreum.elm
+	url = git@github.com:damjack/elm-newrelic-nreum.elm.git
